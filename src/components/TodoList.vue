@@ -4,9 +4,9 @@
 }
 
 .header {
-  background-color: purple;
+  background-color: cornflowerblue;
   padding: 30px 30px;
-  color: yellow;
+  color: black;
   text-align: center;
 }
 
@@ -17,9 +17,9 @@
 }
 </style>
 <template>
-  <div id="todolistapp">
+  <div id="todolist">
     <div id="header" class="header">
-      <h2>Todo List App</h2>
+      <h2>기록하고, 잊지말아요~</h2>
       <input-todo/>
     </div>
     <item-list></item-list>
