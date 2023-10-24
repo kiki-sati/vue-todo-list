@@ -59,25 +59,22 @@ ul li.checked::before {
 <template>
   <ul id="todolist">
     <li v-for="a in todolist" :key="a.id" :class="checked(a.done)"
-        @click="doneToggle(a.id)">
+        @click="doneToggle({id : a.id})">
       <span>{{ a.todo }}</span>
       <span v-if="a.done"> (완료)</span>
-      <span class="close" v-on:click.stop="deleteTodo(a.id)">&#x00D7;</span>
+      <span class="close" @click.stop="deleteTodo({id : a.id})">&#x00D7;</span>
     </li>
   </ul>
 </template>
 <script type="text/javascript">
 import Constant from "@/Constant";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   /*TODO: vuex 11장 로 저장하기*/
 
   name    : 'item-list',
-  computed: {
-    todolist() {
-      return this.$store.state.todolist
-    }
-  },
+  computed: mapState(['todolist']),
   methods : {
     checked: function (done) {
       if (done) return {checked: true};
@@ -92,7 +89,11 @@ export default {
     },
     deleteTodo: function (id) {
       this.$store.commit(Constant.DELETE_TODO, {id:id})
-    }
+    },
+    ...mapMutations([
+    Constant.DELETE_TODO,
+    Constant.DONE_TOGGLE
+    ])
   }
 }
 </script>
